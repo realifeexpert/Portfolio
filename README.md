@@ -1,33 +1,133 @@
-# Cyber Portfolio (Full Stack)
+# 🛡️ Harshal Borhade - Cybersecurity Portfolio
 
-A modern animated portfolio based on your resume.
+A modern full-stack cybersecurity portfolio showcasing my skills, projects, certifications, and professional journey in cybersecurity, software development, and data analytics.
 
-## Tech Stack
-- Frontend: React + TypeScript + Vite
-- Backend: Node.js + Express + TypeScript
+## 🚀 Live Demo
 
-## Run locally
+Website: https://harshalborhade.in
+
+## 📌 About
+
+This portfolio highlights:
+
+- Cybersecurity skills and expertise
+- Academic and professional projects
+- Certifications and achievements
+- Technical skills
+- Resume and contact information
+- Professional experience
+
+## 🛠️ Tech Stack
+
+### Frontend
+- React
+- TypeScript
+- Vite
+- Framer Motion
+
+### Backend
+- Node.js
+- Express.js
+- TypeScript
+
+### Development Tools
+- Git & GitHub
+- npm Workspaces
+
+## 📂 Project Structure
+
+```text
+cyber-portfolio/
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── vite.config.ts
+│
+├── backend/
+│   ├── src/
+│   └── server.ts
+│
+├── package.json
+└── README.md
+```
+
+## ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/realifeexpert/Portfolio.git
+cd Portfolio
+```
+
+Install dependencies:
+
 ```bash
 npm install
+```
+
+## ▶️ Run Locally
+
+Start frontend and backend together:
+
+```bash
 npm run dev
 ```
 
-- Frontend: http://localhost:5173
-- Backend: http://localhost:5000
 
-## Deploy on one domain
-This repo is set up so the backend can serve the built frontend from the same domain.
+## 🏗️ Production Build
 
-1. Build the app:
+Build the application:
+
 ```bash
 npm run build
 ```
 
-2. Start the backend:
+Run production server:
+
 ```bash
 npm start
 ```
 
-3. Point your domain to the backend service.
+## 🎯 Featured Skills
 
-If you deploy the frontend and backend separately, set `VITE_API_URL` in the frontend build environment to your backend URL. If you deploy them together, no extra frontend environment variable is needed.
+- Cybersecurity Fundamentals
+- Network Security
+- Ethical Hacking
+- Vulnerability Assessment
+- Web Application Security
+- Python Programming
+- Data Analytics
+- React Development
+- Node.js Development
+
+## 📜 Certifications
+
+- Cybersecurity Certifications
+- Technical Training Programs
+- Industry Workshops
+
+## 📫 Contact
+
+**Harshal Borhade**
+
+🌐 Website: https://harshalborhade.in
+
+💼 LinkedIn: (Add your LinkedIn URL)
+
+📧 Email: hborhade2714@gmail.com
+
+🐙 GitHub: https://github.com/realifeexpert
+
+## 🤝 Contributing
+
+Suggestions and feedback are welcome. Feel free to fork the repository and submit pull requests.
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+⭐ If you found this portfolio useful, please consider starring the repository.
