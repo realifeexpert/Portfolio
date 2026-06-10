@@ -114,7 +114,7 @@ npm start
 
 🌐 Website: https://harshalborhade.in
 
-💼 LinkedIn: (Add your LinkedIn URL)
+💼 LinkedIn: linkedin.com/in/harshal-borhade
 
 📧 Email: hborhade2714@gmail.com
 
