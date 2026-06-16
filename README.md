@@ -1,6 +1,6 @@
 # 🛡️ Harshal Borhade - Cybersecurity Portfolio
 
-A modern full-stack cybersecurity portfolio showcasing my skills, projects, certifications, and professional journey in cybersecurity, software development, and data analytics.
+A modern frontend-only cybersecurity portfolio showcasing my skills, projects, certifications, and professional journey in cybersecurity, software development, and data analytics.
 
 ## 🚀 Live Demo
 
@@ -25,11 +25,6 @@ This portfolio highlights:
 - Vite
 - Framer Motion
 
-### Backend
-- Node.js
-- Express.js
-- TypeScript
-
 ### Development Tools
 - Git & GitHub
 - npm Workspaces
@@ -43,11 +38,6 @@ cyber-portfolio/
 │   ├── src/
 │   ├── public/
 │   └── vite.config.ts
-│
-├── backend/
-│   ├── src/
-│   └── server.ts
-│
 ├── package.json
 └── README.md
 ```
@@ -69,7 +59,7 @@ npm install
 
 ## ▶️ Run Locally
 
-Start frontend and backend together:
+Start the frontend:
 
 ```bash
 npm run dev
@@ -84,7 +74,7 @@ Build the application:
 npm run build
 ```
 
-Run production server:
+Preview the production build locally:
 
 ```bash
 npm start
@@ -100,7 +90,6 @@ npm start
 - Python Programming
 - Data Analytics
 - React Development
-- Node.js Development
 
 ## 📜 Certifications
 

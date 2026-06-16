@@ -1,12 +1,22 @@
 import { AnimatePresence, motion, useScroll, useSpring, Variants } from "framer-motion";
 import { SyntheticEvent, useEffect, useState } from "react";
 import Section from "./components/Section";
+import resumeData from "./data/resumeData";
 import { Certification, GithubProject, ResumeData } from "./types";
 
 type ThemeMode = "dark" | "light";
 
-const API_BASE =
-  import.meta.env.VITE_API_URL || (import.meta.env.DEV ? "http://localhost:5000" : "");
+interface GithubRepoApi {
+  id: number;
+  name: string;
+  description: string | null;
+  html_url: string;
+  language: string | null;
+  stargazers_count: number;
+  updated_at: string;
+  fork: boolean;
+}
+
 const CERT_PLACEHOLDER =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='520'%3E%3Crect width='100%25' height='100%25' fill='%230f1632'/%3E%3Ctext x='50%25' y='50%25' fill='%23edf2ff' font-size='34' text-anchor='middle' dominant-baseline='middle'%3EAdd Certificate Image%3C/text%3E%3C/svg%3E";
 const PROFILE_PLACEHOLDER =
@@ -17,10 +27,7 @@ const resolveMediaUrl = (url: string) => {
   if (/^https?:\/\//i.test(url) || url.startsWith("data:")) {
     return url;
   }
-  if (url.startsWith("/")) {
-    return `${API_BASE}${url}`;
-  }
-  return `${API_BASE}/${url}`;
+  return url;
 };
 
 const tryImageFallback = (
@@ -120,12 +127,31 @@ const heroRolePhrases = [
   "SOC Analyst",
 ];
 
+const blockedRepoTerms = [
+  "python-program",
+  "python program",
+  "python tutorial",
+  "python-tutorial",
+  "tutorial",
+  "cyber-portfolio",
+  "portfolio"
+];
+
+const pinnedProject: GithubProject = {
+  id: -1,
+  name: "Supply Chain AI Dashboard",
+  description:
+    "AI-driven dashboard for monitoring supply chain signals, forecasting trends, and supporting faster operational decisions.",
+  htmlUrl: "https://github.com/realifeexpert/supply-chain-ai-dashboard",
+  language: "AI / Analytics",
+  stars: 0,
+  updatedAt: ""
+};
+
 function App() {
-  const [data, setData] = useState<ResumeData | null>(null);
+  const data = resumeData;
   const [githubProjects, setGithubProjects] = useState<GithubProject[]>([]);
   const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
   const [theme, setTheme] = useState<ThemeMode>("dark");
   const [activeHeroRole, setActiveHeroRole] = useState(0);
   const [downloadingCertificate, setDownloadingCertificate] = useState<string | null>(null);
@@ -165,36 +191,52 @@ function App() {
   useEffect(() => {
     const loadPortfolio = async () => {
       try {
-        const [profileResponse, githubResponse] = await Promise.all([
-          fetch(`${API_BASE}/api/portfolio`),
-          fetch(`${API_BASE}/api/github-projects`)
-        ]);
+        const response = await fetch(
+          `https://api.github.com/users/${data.githubUsername}/repos?sort=updated&per_page=12`,
+          {
+            headers: {
+              Accept: "application/vnd.github+json"
+            }
+          }
+        );
 
-        if (!profileResponse.ok) throw new Error("Failed to fetch portfolio details.");
-        const profile = (await profileResponse.json()) as ResumeData;
-        setData(profile);
-
-        if (githubResponse.ok) {
-          const githubData = (await githubResponse.json()) as GithubProject[];
-          setGithubProjects(githubData);
+        if (!response.ok) {
+          return;
         }
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong.");
-      } finally {
-        setLoading(false);
+
+        const repos = (await response.json()) as GithubRepoApi[];
+        const projects = repos
+          .filter((repo) => {
+            if (repo.fork) return false;
+            const loweredName = repo.name.toLowerCase();
+            return !blockedRepoTerms.some((term) => loweredName.includes(term));
+          })
+          .map((repo) => ({
+            id: repo.id,
+            name: repo.name,
+            description: repo.description ?? "No description provided yet.",
+            htmlUrl: repo.html_url,
+            language: repo.language ?? "Not specified",
+            stars: repo.stargazers_count,
+            updatedAt: repo.updated_at
+          }));
+
+        const hasPinnedProject = projects.some(
+          (project) => project.htmlUrl.toLowerCase() === pinnedProject.htmlUrl.toLowerCase()
+        );
+
+        if (!hasPinnedProject) {
+          projects.push(pinnedProject);
+        }
+
+        setGithubProjects(projects);
+      } catch {
+        setGithubProjects([]);
       }
     };
 
     void loadPortfolio();
-  }, []);
-
-  if (loading) {
-    return <div className="status">Loading portfolio...</div>;
-  }
-
-  if (error || !data) {
-    return <div className="status error">{error || "No data found."}</div>;
-  }
+  }, [data.githubUsername]);
 
   const downloadCertificate = async (certificate: Certification) => {
     const certificateUrl = resolveMediaUrl(certificate.image);
@@ -308,6 +350,7 @@ function App() {
               <motion.div className="contact-links" variants={heroContentItem}>
                 <motion.a href={`tel:${data.phone}`} className="btn secondary" whileHover={{ y: -3, scale: 1.03 }} whileTap={{ scale: 0.98 }}>Call</motion.a>
                 <motion.a href={`mailto:${data.email}`} className="btn secondary" whileHover={{ y: -3, scale: 1.03 }} whileTap={{ scale: 0.98 }}>Email</motion.a>
+                <motion.a href={data.resume} className="btn primary" download whileHover={{ y: -3, scale: 1.03 }} whileTap={{ scale: 0.98 }}>Resume</motion.a>
                 <motion.a href={`https://${data.linkedin}`} className="btn secondary" target="_blank" rel="noreferrer" whileHover={{ y: -3, scale: 1.03 }} whileTap={{ scale: 0.98 }}>LinkedIn</motion.a>
                 <motion.a href={`https://${data.github}`} className="btn secondary" target="_blank" rel="noreferrer" whileHover={{ y: -3, scale: 1.03 }} whileTap={{ scale: 0.98 }}>GitHub</motion.a>
               </motion.div>

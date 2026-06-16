@@ -1,6 +1,6 @@
 import { ResumeData } from "../types";
 
-export const resumeData: ResumeData = {
+const resumeData: ResumeData = {
   name: "Harshal Borhade",
   phone: "+919321610285",
   email: "hborhade2714@gmail.com",
@@ -10,6 +10,7 @@ export const resumeData: ResumeData = {
   profilePhoto: "/profile/passport-photo.jpg",
   profile:
     "A software engineer skilled in developing secure systems with a strong understanding of cybersecurity principles and practices.",
+  resume: "/resume.pdf",
   technicalSkills: ["Python", "Java", "C/C++", "JavaScript", "Node.js", "React", "Flask"],
   tools: ["Wireshark", "Nmap", "Web Security", "Computer Networks"],
   education: {
@@ -46,19 +47,51 @@ export const resumeData: ResumeData = {
   ],
   projects: [
     {
-      title: "Sentimental Analysis of Electronic Product",
-      timeline: "December 2024 - February 2025",
+      title: "Python Programs",
+      timeline: "2024",
       points: [
-        "Collected and analyzed customer reviews to capture user opinions and product feedback.",
-        "Used NLP techniques to classify sentiment into positive, negative, and neutral categories."
+        "Collection of Python programming examples and utilities.",
+        "Demonstrates various Python concepts and best practices."
       ]
     },
     {
-      title: "Supply Chain Management",
-      timeline: "August 2024 - October 2025",
+      title: "Python Tutorials",
+      timeline: "2024",
       points: [
-        "Developed modules for stock tracking, order processing, and supplier management.",
-        "Improved workflow efficiency through real-time inventory and operations visibility."
+        "Comprehensive tutorials covering Python concepts and fundamentals.",
+        "Includes practical examples and code walkthroughs for learning."
+      ]
+    },
+    {
+      title: "Steganography Project",
+      timeline: "2024",
+      points: [
+        "Implemented encryption and decryption techniques for data hiding.",
+        "Developed steganography methods to conceal information within digital media."
+      ]
+    },
+    {
+      title: "GymX Fitness",
+      timeline: "2024",
+      points: [
+        "Built a fitness application using JavaScript.",
+        "Provides tools and features for workout tracking and fitness management."
+      ]
+    },
+    {
+      title: "Password Strength Analyzer",
+      timeline: "2024",
+      points: [
+        "Python-based cybersecurity tool for analyzing password strength using entropy calculations.",
+        "Identifies security vulnerabilities through pattern detection and strength evaluation."
+      ]
+    },
+    {
+      title: "AI-Based Supply Chain Dashboard",
+      timeline: "2024",
+      points: [
+        "Developed a TypeScript-based dashboard for supply chain management.",
+        "Leveraged AI to optimize logistics, inventory, and operations visibility."
       ]
     }
   ],
@@ -89,3 +122,5 @@ export const resumeData: ResumeData = {
     }
   ]
 };
+
+export default resumeData;

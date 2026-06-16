@@ -654,8 +654,6 @@ ul {
   border: 2px solid var(--surface-border);
   box-shadow: 0 0 60px var(--accent-2), 0 0 100px rgba(0, 255, 200, 0.3);
 }
-  border: 1px solid rgba(119, 225, 255, 0.36);
-}
 
 .status {
   min-height: 100vh;

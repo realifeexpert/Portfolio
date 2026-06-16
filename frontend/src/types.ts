@@ -46,6 +46,7 @@ export interface ResumeData {
   githubUsername: string;
   profilePhoto: string;
   profile: string;
+  resume: string;
   technicalSkills: string[];
   tools: string[];
   education: Education;
